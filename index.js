@@ -44,10 +44,10 @@ async function run() {
     try {
         await client.connect();
 
-        const productsCollection = client.db('binaryLogic').collection('productCollection');
-        const reviewsCollection = client.db('binaryLogic').collection('reviews');
-        const usersCollection = client.db('binaryLogic').collection('users');
-        const orderCollection = client.db('binaryLogic').collection('orders');
+        const partsCollection = client.db('NanoTEch').collection('parts');
+        const reviewsCollection = client.db('NanoTEch').collection('reviews');
+        const usersCollection = client.db('NanoTEch').collection('users');
+        const orderCollection = client.db('NanoTEch').collection('orders');
 
 
         // Payment Getway
@@ -85,14 +85,14 @@ async function run() {
         // ADD Parts
         app.post('/parts', verifyJWT, verifyAdmin, async (req, res) => {
             const parts = req.body;
-            const result = await productsCollection.insertOne(parts);
+            const result = await partsCollection.insertOne(parts);
             res.send(result);
         })
 
         //Get all Parts
         app.get('/parts', async (req, res) => {
             const query = {};
-            const cursor = productsCollection.find(query);
+            const cursor = partsCollection.find(query);
             const parts = await cursor.toArray();
             res.send(parts);
         })
@@ -101,7 +101,7 @@ async function run() {
         app.get('/parts/:id', async (req, res) => {
             const id = req.params.id;
             const query = { _id: ObjectId(id) };
-            const parts = await productsCollection.findOne(query);
+            const parts = await partsCollection.findOne(query);
             res.send(parts)
         })
         // Update Order
@@ -112,7 +112,7 @@ async function run() {
             const updateDoc = {
                 $set: parts,
             };
-            const result = await productsCollection.updateOne(filter, updateDoc);
+            const result = await partsCollection.updateOne(filter, updateDoc);
             res.send(result);
         })
 
@@ -120,7 +120,7 @@ async function run() {
         app.delete('/parts/admin/:id', verifyJWT, verifyAdmin, async (req, res) => {
             const id = req.params.id;
             const filter = { _id: ObjectId(id) };
-            const result = await productsCollection.deleteOne(filter)
+            const result = await partsCollection.deleteOne(filter)
             res.send(result);
         })
 
@@ -278,9 +278,9 @@ run().catch(console.dir);
 
 
 app.get('/', (req, res) => {
-    res.send('Hello from Binary Logic')
+    res.send('Hello from NanoTEch')
 })
 
 app.listen(port, () => {
-    console.log(`Binary Logic  Server is running on port ${port}`);
+    console.log(`NanoTEch  Server is running on port ${port}`);
 })
