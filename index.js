@@ -44,10 +44,10 @@ async function run() {
     try {
         await client.connect();
 
-        const partsCollection = client.db('NanoTEch').collection('parts');
-        const reviewsCollection = client.db('NanoTEch').collection('reviews');
-        const usersCollection = client.db('NanoTEch').collection('users');
-        const orderCollection = client.db('NanoTEch').collection('orders');
+        const partsCollection = client.db('binaryLogic').collection('productCollection');
+        const reviewsCollection = client.db('binaryLogic').collection('reviews');
+        const usersCollection = client.db('binaryLogic').collection('users');
+        const orderCollection = client.db('binaryLogic').collection('orders');
 
 
         // Payment Getway
