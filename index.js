@@ -15,7 +15,9 @@ app.use(express.json())
 const secret = process.env.STRIPE_SECRET_KEY;
 const stripe = require('stripe')(secret);
 
-const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.emmtc.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
+
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.nrqlb.mongodb.net/?retryWrites=true&w=majority`;
+
 
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 
@@ -278,9 +280,9 @@ run().catch(console.dir);
 
 
 app.get('/', (req, res) => {
-    res.send('Hello from NanoTEch')
+    res.send('Hello from binaryLogic')
 })
 
 app.listen(port, () => {
-    console.log(`NanoTEch  Server is running on port ${port}`);
+    console.log(`binaryLogic  Server is running on port ${port}`);
 })
